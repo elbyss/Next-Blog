@@ -1,4 +1,4 @@
-import PostList from '@/components/PostList';
+import PostCard from '@/components/PostCard';
 import { allPosts, Post } from 'contentlayer/generated';
 
 export default function blogPage() {
@@ -6,7 +6,7 @@ export default function blogPage() {
   return (
     <div className={`mt-10 flex flex-col`}>
       {posts.map((post: Post) => (
-        <PostList
+        <PostCard
           date={post.date}
           title={post.title}
           content={post.content}

@@ -1,6 +1,8 @@
 import localFont from 'next/font/local';
 import './globals.css';
 import CategoryLayout from '@/shared/CategoryLayout';
+import { Metadata } from 'next';
+import { meta } from '@/shared/meta';
 
 const geistSans = localFont({
   src: './fonts/GeistVF.woff',
@@ -10,6 +12,11 @@ const geistMono = localFont({
   src: './fonts/GeistMonoVF.woff',
   variable: '--font-geist-mono',
 });
+
+export const metadata: Metadata = {
+  title: meta.title,
+  description: meta.description,
+};
 
 export default function RootLayout({
   children,

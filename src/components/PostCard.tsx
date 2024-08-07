@@ -1,7 +1,8 @@
 import { Post } from 'contentlayer/generated';
+import { Metadata } from 'next';
 import Link from 'next/link';
 
-export default function PostList({
+export default function PostCard({
   date,
   title,
   content,

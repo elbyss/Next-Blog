@@ -1,5 +1,5 @@
 import RecentPosts from '@/components/RecentPosts';
-import { metadata } from '@/shared/metadata';
+import { meta } from '@/shared/meta';
 import Image from 'next/image';
 
 export default function Home() {
@@ -16,7 +16,7 @@ export default function Home() {
         <span
           className={`absolute top-8 font-extrabold italic text-white text-5xl md:text-6xl text flex justify-center w-full drop-shadow-lg`}
         >
-          {metadata.title}
+          {meta.title}
         </span>
       </div>
       <RecentPosts />

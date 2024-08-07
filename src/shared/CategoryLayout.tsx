@@ -1,5 +1,5 @@
 import Navbar from '@/components/Navbar';
-import { metadata } from './metadata';
+import { meta } from './meta';
 import Image from 'next/image';
 import { ReactNode } from 'react';
 import Link from 'next/link';
@@ -11,7 +11,7 @@ export default function CategoryLayout({ children }: { children: ReactNode }) {
         <Link href='/'>
           <div className='flex flex-row items-center gap-4'>
             <Image src='/logo.svg' alt='logo' width={100} height={48} className='object-cover rounded-3xl h-12'></Image>
-            <span className='font-bold text-2xl'>{metadata.title}</span>
+            <span className='font-bold text-2xl'>{meta.title}</span>
           </div>
         </Link>
         <Navbar />

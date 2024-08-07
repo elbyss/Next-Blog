@@ -1,4 +1,4 @@
-import PostList from './PostList';
+import PostCard from './PostCard';
 import { allPosts, Post } from 'contentlayer/generated';
 
 export default function RecentPosts() {
@@ -7,7 +7,7 @@ export default function RecentPosts() {
     <div className={`mt-10 flex flex-col`}>
       최근 포스트
       {posts.map((post: Post) => (
-        <PostList
+        <PostCard
           date={post.date}
           title={post.title}
           content={post.content}

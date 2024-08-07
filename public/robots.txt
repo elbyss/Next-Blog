@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://elbyss.vercel.app
+
+# Sitemaps
+Sitemap: https://elbyss.vercel.app/sitemap.xml
