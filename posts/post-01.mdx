@@ -1,0 +1,81 @@
+---
+title: 첫 글
+date: 2022-03-10
+content: ㅎㅇㅎㅇㅎㅇㅎㅇ
+---
+
+# 반갑습니다
+
+## 반갑습니다
+
+### test
+
+#### 테스트
+
+- test
+
+![test](https://gongu.copyright.or.kr/gongu/wrt/cmmn/wrtFileImageView.do?wrtSn=13262118&filePath=L2Rpc2sxL25ld2RhdGEvMjAyMC8yMS9DTFMxMDAwNi82MmZhMWExMy03ZjRmLTQ1NWMtYTZlNy02ZTk2YjhjMjBkYTk=&thumbAt=Y&thumbSe=b_tbumb&wrtTy=10006)
+
+<div className='border-8 text-lime-800'>하이</div>
+
+```js:/components/dd showLineNumbers {1, 2, 8-12}
+import { Post } from 'contentlayer/generated';
+import Link from 'next/link';
+
+export default function PostList({
+  date,
+  title,
+  content,
+  slug,
+}: Pick<Post, 'date' | 'title' | 'content'> & { slug: Post['_id'] }) {
+  return (
+    <div className='bg-sky-100 w-full my-7'>
+      <Link href={`/blog/${slug}`}>
+        <div className='font-medium text-xs text-gray-400'>{date}</div>
+        <div className={`font-extrabold text-2xl mt-2`}>{title}</div>
+        <div className={`font-medium text-gray-600 text-xl mt-1`}>{content}</div>
+      </Link>
+    </div>
+  );
+}
+```
+
+```python showLineNumbers{3} /stdin/2#b /sys/2#y
+import sys
+sys.stdin = open('./input.txt', 'r')
+input = sys.stdin.readline
+n = int(input())
+arr = []
+for i in range(n):
+  a, b = map(int, input().split())
+  arr.append([a, b])
+
+arr.sort(key=lambda x: (x[1], x[0]))
+
+count = 0
+last_end_time = 0
+
+for start, end in arr:
+    if start >= last_end_time:
+        last_end_time = end
+        count += 1
+
+print(count)
+```
+
+```jsx
+import MDXPost from './MDXPost';
+
+const PostContent = ({}: Props) => {
+  const MDXComponent = useMDXComponent(post.body.code);
+  return (
+    <MDXPost>
+      <MDXComponent
+        title={post.title}
+        date={post.data}
+        readingTime={post.readingTime.text}
+      />
+    <MDXPost/>
+  )
+}
+```
