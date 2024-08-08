@@ -3,12 +3,10 @@ import { meta } from '../utils/meta';
 import Image from 'next/image';
 import { ReactNode } from 'react';
 import Link from 'next/link';
-import ProgressbarWrapper from './ProgressbarWrapper';
 
 export default function CategoryLayout({ children }: { children: ReactNode }) {
   return (
     <>
-      <ProgressbarWrapper />
       <div className={`w-full flex flex-col items-center p-3`}>
         <header className='w-full max-w-3xl flex justify-between items-center my-4'>
           <Link href='/'>

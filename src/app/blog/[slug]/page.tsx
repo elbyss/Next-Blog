@@ -1,4 +1,5 @@
 import PostCard from '@/components/PostCard';
+import ProgressbarWrapper from '@/shared/ProgressbarWrapper';
 import { allPosts } from 'contentlayer/generated';
 import { Metadata } from 'next';
 import { useMDXComponent } from 'next-contentlayer/hooks';
@@ -22,16 +23,19 @@ const PostDetailPage = ({ params }: { params: { slug: string } }) => {
   const MDXContent = useMDXComponent(post.body.code || '');
 
   return (
-    <article className='mx-auto max-w-4xl py-4 prose prose-slate'>
-      <PostCard
-        date={post.date}
-        title={post.title}
-        content={post.content}
-        key={post._id}
-        slug={post._raw.flattenedPath}
-      />
-      <MDXContent />
-    </article>
+    <>
+      <ProgressbarWrapper />
+      <article className='mx-auto max-w-4xl py-4 prose prose-slate'>
+        <PostCard
+          date={post.date}
+          title={post.title}
+          content={post.content}
+          key={post._id}
+          slug={post._raw.flattenedPath}
+        />
+        <MDXContent />
+      </article>
+    </>
   );
 };
 
