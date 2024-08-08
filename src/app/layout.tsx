@@ -5,6 +5,7 @@ import { Metadata } from 'next';
 import { meta } from '@/utils/meta';
 import GoogleTagScript from '@/components/GoogleTagScript';
 import GoogleTagNoScript from '@/components/GoogleTagNoScript';
+import { GoogleAnalytics } from '@next/third-parties/google';
 
 const pretendard = localFont({
   src: './fonts/PretendardVariable.woff2',
@@ -30,7 +31,7 @@ export default function RootLayout({
         <CategoryLayout>{children}</CategoryLayout>
         <GoogleTagNoScript />
       </body>
-      {/* <GoogleAnalytics gaId='G-XYZ' /> */}
+      <GoogleAnalytics gaId={`${process.env.NEXT_PUBLIC_GA_ID}`} />
     </html>
   );
 }
