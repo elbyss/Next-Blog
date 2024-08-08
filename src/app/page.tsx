@@ -1,5 +1,5 @@
 import RecentPosts from '@/components/RecentPosts';
-import { meta } from '@/shared/meta';
+import { meta } from '@/utils/meta';
 import Image from 'next/image';
 
 export default function Home() {
