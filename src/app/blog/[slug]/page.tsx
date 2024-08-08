@@ -6,13 +6,12 @@ import { notFound } from 'next/navigation';
 
 export const generateStaticParams = async () => allPosts.map((post) => ({ slug: post._raw.flattenedPath }));
 
-export async function generateMetadata({ params }: { params: { slug: string } }) {
+export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
   const post = allPosts.find((p) => p._raw.flattenedPath === params.slug);
   if (!post) notFound();
   return {
     title: post.title,
     description: post.content,
-    date: post.date,
   };
 }
 
@@ -31,9 +30,7 @@ const PostDetailPage = ({ params }: { params: { slug: string } }) => {
         key={post._id}
         slug={post._raw.flattenedPath}
       />
-      <div className=''>
-        <MDXContent />
-      </div>
+      <MDXContent />
     </article>
   );
 };
