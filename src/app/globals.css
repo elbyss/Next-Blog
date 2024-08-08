@@ -3,24 +3,24 @@
 @tailwind utilities;
 
 .rehype-code-title {
-  font-family: Consolas, 'Andale Mono WT', 'Andale Mono', 'Lucida Console', 'Lucida Sans Typewriter', 'DejaVu Sans Mono',
-    'Bitstream Vera Sans Mono', 'Liberation Mono', 'Nimbus Mono L', Monaco, 'Courier New', Courier, monospace;
-
   background-color: black;
   color: white;
   z-index: 0;
   border-top-left-radius: 7px;
   border-top-right-radius: 7px;
   padding: 5px 16px;
-  font-weight: 700;
+  font-weight: 600;
   margin-top: 8px;
-  font-size: 14px;
+  font-size: 16px;
+  letter-spacing: 0.4px;
   margin-bottom: -35px;
 }
 
 .prose pre > code {
   display: grid;
-  font-family: 'D2Coding', 'Apple SD gothic';
+  font-family: 'D2Coding', 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto,
+    'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', 'Apple Color Emoji',
+    'Segoe UI Emoji', 'Segoe UI Symbol', sans-serif;
 }
 
 .prose pre::-webkit-scrollbar {
