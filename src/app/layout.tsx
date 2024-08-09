@@ -3,9 +3,7 @@ import './globals.css';
 import CategoryLayout from '@/shared/CategoryLayout';
 import { Metadata } from 'next';
 import { meta } from '@/utils/meta';
-import GoogleTagScript from '@/components/GoogleTagScript';
-import GoogleTagNoScript from '@/components/GoogleTagNoScript';
-import { GoogleAnalytics } from '@next/third-parties/google';
+import { GoogleAnalytics, GoogleTagManager } from '@next/third-parties/google';
 
 const pretendard = localFont({
   src: './fonts/PretendardVariable.woff2',
@@ -25,11 +23,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en'>
-      <GoogleTagScript />
-      {/* <GoogleTagManager gtmId='GTM-XYZ' /> */}
+      <GoogleTagManager gtmId={`${process.env.NEXT_PUBLIC_GTM_ID}`} />
       <body className={`${pretendard.className}`}>
         <CategoryLayout>{children}</CategoryLayout>
-        <GoogleTagNoScript />
       </body>
       <GoogleAnalytics gaId={`${process.env.NEXT_PUBLIC_GA_ID}`} />
     </html>
