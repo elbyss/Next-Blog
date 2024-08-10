@@ -42,7 +42,6 @@ export default function PostCard({
 
         <picture className='relative flex items-center overflow-hidden w-[130px] h-[90px] rounded-xl border'>
           <Image
-            priority
             src={thumbnail || ''}
             alt='thumbnail'
             width={130}
