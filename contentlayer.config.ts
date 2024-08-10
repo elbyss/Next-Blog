@@ -8,8 +8,10 @@ export const Post = defineDocumentType(() => ({
   filePathPattern: `**/*.mdx`,
   fields: {
     title: { type: 'string', required: true },
-    date: { type: 'string', required: true },
+    date: { type: 'date', required: true },
     content: { type: 'string', required: true },
+    tags: { type: 'list', of: { type: 'string' }, required: true },
+    thumbnail: { type: 'string', required: false },
   },
   computedFields: {
     url: { type: 'string', resolve: (post) => `/posts/${post._raw.flattenedPath}` },
