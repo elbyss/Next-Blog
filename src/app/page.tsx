@@ -5,7 +5,7 @@ import Image from 'next/image';
 export default function Home() {
   return (
     <div className={`my-5 w-full`}>
-      <div className={`relative`}>
+      {/* <div className={`relative`}>
         <Image
           src={`/profile-simple.svg`}
           alt='대표 이미지'
@@ -18,7 +18,7 @@ export default function Home() {
         >
           {meta.title}
         </span>
-      </div>
+      </div> */}
       <RecentPosts />
     </div>
   );
