@@ -14,6 +14,11 @@ const pretendard = localFont({
 export const metadata: Metadata = {
   title: meta.title,
   description: meta.description,
+  verification: {
+    other: {
+      'naver-site-verification': `${process.env.NEXT_PUBLIC_NAVER_ID}`,
+    },
+  },
   icons: {
     icon: '/favicon.ico',
   },
