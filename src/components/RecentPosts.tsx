@@ -2,11 +2,16 @@
 import { ExtendPostProps } from '@/types/post';
 import PostCard from './PostCard';
 import sortPostsByDate from '@/utils/sortPostsByDate';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function RecentPosts() {
   const [selectedTag, setSelectedTag] = useState('전체');
-  const posts = sortPostsByDate();
+  const [posts, setPosts] = useState<ExtendPostProps[]>([]);
+  useEffect(() => {
+    const sortedPosts = sortPostsByDate();
+    setPosts(sortedPosts);
+  }, []);
+
   const filteredPosts = selectedTag === '전체' ? posts : posts.filter((post) => post.tags.includes(selectedTag));
   const allTags = Array.from(new Set(posts.flatMap((post) => post.tags)));
   const tagStyle = `bg-gray-200 text-gray-800 px-3 py-1 rounded-full text-sm cursor-pointer hover:bg-gray-300 transition`;
@@ -30,7 +35,8 @@ export default function RecentPosts() {
             />
           ))}
         </div>
-        <aside className='flex-[0.4]'>
+        {/* 태그 */}
+        <aside className='flex-[0.4] sm:hidden'>
           <span>태그</span>
           <div className='flex gap-2 p-4 border'>
             <span
