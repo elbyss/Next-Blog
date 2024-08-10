@@ -42,7 +42,7 @@ export default function PostCard({
           </div>
         </div>
 
-        <picture className='relative flex items-center overflow-hidden w-[130px] h-[90px] rounded-xl'>
+        <picture className='relative flex items-center overflow-hidden w-[130px] h-[90px] rounded-xl border'>
           <Image
             src={thumbnail || ''}
             alt='thumbnail'
