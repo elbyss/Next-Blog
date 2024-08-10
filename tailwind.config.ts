@@ -10,6 +10,11 @@ const config: Config = {
     './posts/**/*.{js,ts,jsx,tsx,md,mdx}',
   ],
   theme: {
+    screens: {
+      lg: { max: '1023px' },
+      md: { max: '767px' },
+      sm: { max: '639px' },
+    },
     extend: {
       colors: {
         background: 'var(--background)',
