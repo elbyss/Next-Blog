@@ -12,17 +12,10 @@ export default function PostCard({
   slug,
   tags,
   thumbnail,
-  shape = 'list',
 }: Pick<ExtendPostProps, 'date' | 'title' | 'content' | 'tags' | 'thumbnail'> & {
   slug: ExtendPostProps['_raw']['flattenedPath'];
   shape: PostShapeProps;
 }) {
-  const postShapeStyles = {
-    card: 'rounded-xl w-full shadow-lg hover:scale-105 transition-all hover:text-[#a580ff]',
-    list: 'rounded-xl w-full shadow-lg hover:scale-105 transition-all flex',
-    simple: 'bg-blue-300',
-  };
-
   return (
     <>
       <Link
@@ -55,7 +48,6 @@ export default function PostCard({
             width={130}
             height={90}
             className='rounded-xl object-cover group-hover:scale-125 bg-gray-100 group-hover:transition group-hover:duration-300'
-            placeholder='blur'
           />
         </picture>
       </Link>
