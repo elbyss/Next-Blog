@@ -30,12 +30,12 @@ const PostDetailPage = ({ params }: { params: { slug: string } }) => {
       <ProgressbarWrapper />
       <article className='mx-auto max-w-4xl py-4 prose prose-slate'>
         <div className='flex flex-col gap-4'>
-          <div>{formatDate(post.date)}</div>
-          <div className='text-5xl font-bold'>{post.title}</div>
-          <div>{post.content}</div>
+          <div className='sm:text-xs'>{formatDate(post.date)}</div>
+          <div className='text-5xl font-bold sm:text-xl'>{post.title}</div>
+          <div className='sm:text-sm'>{post.content}</div>
           <div className='flex gap-2'>
             {allTags.map((tag) => (
-              <span key={tag} className={`${tagStyle}  `}>
+              <span key={tag} className={`${tagStyle} sm:text-xs`}>
                 {tag}
               </span>
             ))}
