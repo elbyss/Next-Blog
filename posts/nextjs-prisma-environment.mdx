@@ -1,0 +1,105 @@
+---
+title: '[Next.js] Prisma 환경설정'
+date: 2024-06-05 17:39
+content: Next.js 환경에서 prisma(프리즈마) 환경을 구성합니다.
+tags:
+  - 개발
+thumbnail: '/posts/nextjs-prisma-environment/prisma.jpg'
+---
+
+![prisma logo](/posts/nextjs-prisma-environment/prisma.jpg)
+Prisma는 TypeScript/JavaScript용 ORM 도구이다.
+공식 문서에서는 기존의 ORM이랑은 근본적으로 다르게 동작하기 때문에 이를 새로운 종류의 ORM 도구라고 설명하고 있다.
+(관련 내용: https://www.prisma.io/docs/orm/overview/prisma-in-your-stack/is-prisma-an-orm)
+
+ORM이야 뭐 검색하면 관련 문서는 많으니 ORM에 대한 자세한 설명은 각설하고 바로 본론으로 들어가서,
+1편에서는 설치 및 환경 설정하는 부분을 다룰 것이다. 본 내용은 nestjs + psql + prisma 을 기준으로 설명하며 버전 정보는 아래와 같다.
+
+- ### Node v20.14
+- ### Nest v10.3.8
+- ### Prisma v5.15
+
+2024년 6월 5일에 prisma 5.15 버전이 릴리즈 되었다. 주요 변경사항은 해당 버전부터 스키마 파일 분리가 가능하다는 점이다.
+
+## 1. Prisma 설치
+
+```bash
+yarn add prisma @prisma/client
+```
+
+공식 문서에는 npx를 기준으로 설치하지만 패키지 매니저는 본인 취향에 맞게 써주면 된다.
+prisma는 ORM 도구이고 client는 prisma에서 생성되는 db와 상호작용하는 쿼리 빌더이다. 쉽게 설명하면,
+schema 모델을 작성하는 것은 prisma의 역할이고
+
+#### `ex) Model User { id Int @id .... }`
+
+이러한 모델들을 바탕으로 CRUD 기능을 구현하기 위해 js/ts로 쉽게 작성하여 불러오는 것이 prisma/client 의 역할이다.
+
+#### `ex) prisma.user.create({ ... })`
+
+---
+
+## 2. Database 연결
+
+```bash
+yarn prisma init
+```
+
+위 명령어를 사용하면 db 설정 파일을 생성한다. 생성되는 파일은 다음과 같다.
+/prisma/schema.prisma - 스키마 모델 정의 파일
+.env - 환경 변수 파일
+prisma는 기본적으로 PostgreSQL을 적용하고 있기 떄문에 연결정보도 psql 기준으로 생성된다. 만약 다른 DB를 사용하고 싶다면 아래와 옵션을 추가하여 명령어를 적용하면 된다.
+
+```bash
+yarn prisma init --datasource-provider <데이터베이스명> // ex) sqlite, mysql, mongodb ...`
+```
+
+.env 파일에는 db 사용자 정보를 입력해준다.
+
+```bash
+DATABASE_URL="postgresql://db사용자:db패스워드@localhost:5432/DB명?schema=public"
+```
+
+## 2-1 prisma 파일 분리 설정 (선택)
+
+원래는 schema.prisma 파일 하나에 모든 DB 모델을 정의했어야 했다. 때문에 단일 파일에 여러 개의 모델을 정의하다보니 코드가 길어지며 복잡해지는 문제가 있었다. (나도 처음엔 당연히 분리 되는 줄 알았다...이게 왜 없지)
+언제 해결이 되나 싶었는데 현재 글을 작성하는 시점인 6월 5일에 새 버전이 릴리즈 되면서. 이제 5.15 버전부터는 스키마 파일을 분리를 할 수 있다.
+만약 .prisma 파일을 분리하여 모델을 작성하고 싶다면 다음과 같이 폴더 구조를 변경하고 /prisma/schema.prisma -> /prisma/schema/schema.prisma
+
+schema.prisma에 아래와 같은 구문을 추가한다
+
+```prisma
+// /prisma/schema/schema.prisma
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["prismaSchemaFolder"] // prisma schema 파일 분리 설정
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+```
+
+이제 아래 이미지처럼 분리하여 사용할 수 있다.
+![prisma 폴더 구조](/posts/nextjs-prisma-environment/prisma2.png)
+
+## 3. Migrate
+
+prisma migrate는 db 스키마를 관리하기 위한 도구이다. 이 명령어를 통해서 스키마의 변경 사항을 추적하고 업데이트할 수 있게 도와준다. 따라서 기능 구현을 하면서 컬럼을 업데이트 해야하는 등의 경우는 해당 명령어를 사용하여 업데이트해줄 수 있다.
+
+```bash
+yarn prisma migrate dev
+```
+
+![prisma migrate](/posts/nextjs-prisma-environment/prisma3.png)
+
+이 명령어는 개발 환경에서만 사용하고 프로덕션 환경에서는 dev 대신 deploy를 사용해주자.
+
+<a
+  href='https://www.prisma.io/docs/orm/prisma-migrate/workflows/development-and-production'
+  target='blank'
+  alt='관련내용'
+>
+  (관련내용)
+</a>
