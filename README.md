@@ -1,6 +1,6 @@
 # Next-Blog
 
-![next-blog](https://github.com/user-attachments/assets/4f64c22b-7897-4cd0-ba5f-700643376dec)
+![next-blog](public/images/next-blog-intro.png)
 
 > **This blog is designed using Next.js and is inspired by the layouts of tech blogs from large companies.**
 
@@ -23,7 +23,7 @@ This blog is designed to share the latest technology trends and development tips
 ## SEO
 
 <div align='center'>
-<img width="300" alt="스크린샷 2024-08-11 01 16 56" src="https://github.com/user-attachments/assets/46b1aa79-e454-4c06-8c50-8ab0b8ce1091">
+<img width="300" alt="next-blog-seo" src="public/images/next-blog-seo.png">
 </div>
 
 Leveraging Next.js, we have optimized for SEO and ensured fast page loading speeds, while incorporating the latest features of React to enhance user experience.
