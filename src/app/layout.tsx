@@ -4,6 +4,7 @@ import CategoryLayout from '@/shared/CategoryLayout';
 import { Metadata } from 'next';
 import { meta } from '@/utils/meta';
 import { GoogleAnalytics, GoogleTagManager } from '@next/third-parties/google';
+import ThemeWrapper from '@/components/ThemeWrapper';
 
 const pretendard = localFont({
   src: './fonts/PretendardVariable.woff2',
@@ -30,10 +31,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang='en'>
+    <html lang='en' suppressHydrationWarning>
       <GoogleTagManager gtmId={`${process.env.NEXT_PUBLIC_GTM_ID}`} />
-      <body className={`${pretendard.className}`}>
-        <CategoryLayout>{children}</CategoryLayout>
+      <body className={`${pretendard.className} `}>
+        <ThemeWrapper>
+          <CategoryLayout>{children}</CategoryLayout>
+        </ThemeWrapper>
       </body>
       <GoogleAnalytics gaId={`${process.env.NEXT_PUBLIC_GA_ID}`} />
     </html>

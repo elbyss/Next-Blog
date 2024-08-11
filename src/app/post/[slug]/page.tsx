@@ -1,3 +1,4 @@
+import Giscus from '@/components/Giscus';
 import ProgressbarWrapper from '@/shared/ProgressbarWrapper';
 import { formatDate } from '@/utils/date';
 import sortPostsByDate from '@/utils/sortPostsByDate';
@@ -28,7 +29,7 @@ const PostDetailPage = ({ params }: { params: { slug: string } }) => {
   return (
     <>
       <ProgressbarWrapper />
-      <article className='mx-auto max-w-4xl py-4 prose prose-slate'>
+      <article className='mx-auto max-w-4xl py-4 prose prose-slate dark:text-gray-300 dark:prose-headings:text-gray-300  prose-a:text-gray-300'>
         <div className='flex flex-col gap-4'>
           <div className='sm:text-xs'>{formatDate(post.date)}</div>
           <div className='text-5xl font-bold sm:text-xl'>{post.title}</div>
@@ -42,6 +43,7 @@ const PostDetailPage = ({ params }: { params: { slug: string } }) => {
           </div>
         </div>
         <MDXContent />
+        <Giscus />
       </article>
     </>
   );

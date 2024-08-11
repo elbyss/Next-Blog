@@ -9,6 +9,7 @@ const config: Config = {
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
     './posts/**/*.{js,ts,jsx,tsx,md,mdx}',
   ],
+  darkMode: 'class',
   theme: {
     screens: {
       lg: { max: '1023px' },

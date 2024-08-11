@@ -18,7 +18,7 @@ export default function RecentPosts() {
 
   return (
     <>
-      <h2 className='my-8 text-3xl font-bold'>최근 포스트</h2>
+      <h2 className='my-8 text-3xl font-bold dark:text-gray-300'>최근 포스트</h2>
       {/* 최근 게시물 및 태그 */}
       <div className='flex gap-4'>
         <div className='flex-1'>
@@ -51,7 +51,7 @@ export default function RecentPosts() {
               <span
                 key={tag}
                 className={`${tagStyle} ${
-                  selectedTag === tag ? 'bg-violet-200 text-violet-800 hover:bg-violet-300' : ''
+                  selectedTag === tag ? 'bg-violet-200 text-violet-800 hover:bg-violet-300 ' : ''
                 }`}
                 onClick={() => setSelectedTag(tag)}
               >

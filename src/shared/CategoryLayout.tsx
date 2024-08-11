@@ -7,8 +7,8 @@ import Link from 'next/link';
 export default function CategoryLayout({ children }: { children: ReactNode }) {
   return (
     <>
-      <div className={`w-full flex flex-col items-center p-3`}>
-        <header className='w-full max-w-5xl flex justify-between items-center my-4 sticky top-0 bg-white h-24 border-b'>
+      <div className={`w-full flex flex-col items-center p-3 min-h-dvh h-full dark:bg-[#212529]`}>
+        <header className='w-full max-w-5xl flex justify-between items-center my-4 sticky top-0 h-24 border-b bg-white dark:bg-[#212529] dark:border-b-gray-700'>
           <Link href='/'>
             <div className='flex flex-row items-center gap-4'>
               <Image
