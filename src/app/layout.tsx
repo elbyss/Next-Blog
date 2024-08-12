@@ -15,8 +15,17 @@ const pretendard = localFont({
 export const metadata: Metadata = {
   title: meta.title,
   description: meta.description,
+  metadataBase: new URL(`${process.env.NEXT_PUBLIC_APP_BASE_URL}`),
   alternates: {
     canonical: './',
+  },
+  openGraph: {
+    title: '엘비스의 기술 블로그',
+    siteName: '엘비스의 기술 블로그',
+    description: '엘비스의 기술 블로그입니다.',
+    url: 'https://elbyss.vercel.app',
+    type: 'website',
+    images: '/profile-simple-transparent.svg',
   },
   verification: {
     google: `${process.env.NEXT_PUBLIC_GOOGLE_ID}`,
