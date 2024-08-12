@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     description: '엘비스의 기술 블로그입니다.',
     url: 'https://elbyss.vercel.app',
     type: 'website',
-    images: '/profile-simple-transparent.svg',
+    images: '/profile-simple-transparent.png',
   },
   verification: {
     google: `${process.env.NEXT_PUBLIC_GOOGLE_ID}`,
