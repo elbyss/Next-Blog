@@ -18,7 +18,7 @@ export default function RecentPosts() {
 
   return (
     <>
-      <h2 className='my-8 text-3xl font-bold dark:text-gray-300'>최근 포스트</h2>
+      <h2 className='my-8 text-3xl font-bold dark:text-gray-300 sm:text-lg sm:my-4'>최근 포스트</h2>
       {/* 최근 게시물 및 태그 */}
       <div className='flex gap-4'>
         <div className='flex-1'>
