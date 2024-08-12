@@ -42,7 +42,7 @@ const PostDetailPage = ({ params }: { params: { slug: string } }) => {
           <div className='text-5xl font-bold sm:text-xl'>{post.title}</div>
           <div className='sm:text-sm'>{post.content}</div>
           <div className='flex gap-2'>
-            {allTags.map((tag) => (
+            {post.tags.map((tag) => (
               <span key={tag} className={`${tagStyle} sm:text-xs`}>
                 {tag}
               </span>
