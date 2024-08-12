@@ -6,9 +6,8 @@ import ko from 'dayjs/locale/ko';
 dayjs.extend(utc);
 dayjs.extend(timezone);
 dayjs.locale(ko);
-
-const KOREA_TIMEZONE = 'Asia/Seoul';
+dayjs.tz.setDefault('Asia/Seoul');
 
 export function formatDate(date: Date | string): string {
-  return dayjs(date).tz(KOREA_TIMEZONE).format('YYYY년 MM월 DD일 HH:mm');
+  return dayjs(date).tz().format('YYYY년 MM월 DD일 HH:mm');
 }
