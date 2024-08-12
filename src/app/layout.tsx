@@ -15,6 +15,9 @@ const pretendard = localFont({
 export const metadata: Metadata = {
   title: meta.title,
   description: meta.description,
+  alternates: {
+    canonical: './',
+  },
   verification: {
     google: `${process.env.NEXT_PUBLIC_GOOGLE_ID}`,
     other: {
