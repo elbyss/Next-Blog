@@ -7,6 +7,21 @@ import { Metadata } from 'next';
 import { useMDXComponent } from 'next-contentlayer/hooks';
 import { notFound } from 'next/navigation';
 
+// export async function generateMetadata({ params }) {
+//   const post = await getPostData(params.slug);
+//   return {
+//     title: `${post.title} | 엘비스의 기술 블로그`,
+//     description: post.description,
+//     openGraph: {
+//       title: post.title,
+//       description: post.description,
+//       url: `https://elbyss.vercel.app/blog/${params.slug}`,
+//       type: 'article',
+//       images: post.image,
+//     },
+//   };
+// }
+
 export const generateStaticParams = async () => allPosts.map((post) => ({ slug: post._raw.flattenedPath }));
 
 export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
@@ -15,6 +30,13 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   return {
     title: post.title,
     description: post.content,
+    openGraph: {
+      title: post.title,
+      description: post.content,
+      url: `https://elbyss.vercel.app/post/${params.slug}`,
+      type: 'article',
+      images: post.thumbnail,
+    },
   };
 }
 
