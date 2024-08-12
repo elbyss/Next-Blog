@@ -53,9 +53,6 @@ importers:
       sharp:
         specifier: ^0.33.4
         version: 0.33.4
-      shiki:
-        specifier: ^1.12.1
-        version: 1.12.1
     devDependencies:
       '@tailwindcss/typography':
         specifier: ^0.5.13
@@ -3536,7 +3533,7 @@ snapshots:
 
   '@types/hast@3.0.4':
     dependencies:
-      '@types/unist': 3.0.2
+      '@types/unist': 2.0.10
 
   '@types/json5@0.0.29': {}
 
