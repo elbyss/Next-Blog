@@ -1,0 +1,90 @@
+---
+title: 'yarn berry 설정 방법(설치, 전역 설치)'
+date: 2024-01-27 22:25
+content: Yarn Berry 설정하기
+tags:
+  - 개발
+thumbnail: '/posts/yarn-berry-setting/yarnberry1.webp'
+---
+
+yarn berry는 yarn classic(1.x) 버전의 후속 패키지다.
+
+기존 버전과의 차이점은
+
+zero install 과 pnp 라는 요소를 도입하여 패키지를 더 효율적으로 관리한다.
+
+1번의 기능 도입으로 node_modules 에서 해방(zero install 사용시), 설치 속도가 체감되게 빨라졌다.
+
+## 1. 설치(업그레이드) 방법
+
+```bash
+yarn set version berry
+```
+
+yarn berry를 설치하려는 프로젝트에 해당 명령어를 입력한다.
+
+## ​2. Zero Install (선택사항)
+
+yarn berry를 활성화하면 .yarnrc.yml 파일이 생성되는데 여기서 Zero install 사용유무를 정할 수 있다.
+
+node_modules를 사용하려면 그냥 넘어가고 node_modules를 사용하고 싶지 않다면 아래와 같이 설정해준다.
+
+기본값이 node_modules 경우 pnp로 바꿔준다.
+
+```bash:.yarnrc.yml
+// .yarnrc.yml
+nodeLinker: "pnp"
+```
+
+zero install (pnp)을 설정했을 경우, zip 파일 형태로 관리하게 되는데 vscode를 사용하면 아래의 라이브러리도 필수로 설치한다.
+
+<div align='center'>
+
+![yarn-berry-extension](/posts/yarn-berry-setting/yarnberry2.png)
+
+</div>
+
+## 3. 아래 명령어 입력
+
+```bash
+yarn dlx @yarnpkg/sdks vscode
+```
+
+## 4. gitignore 설정
+
+**Zero Install <span className='text-blue-500'>사용</span> 시**
+
+```text:.gitignore
+.yarn/*
+!.yarn/cache
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
+```
+
+**Zero Install <span className='text-red-500'>미사용</span> 시**
+
+```text:.gitignore
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
+```
+
+## yarn berry 전역 설치 (global install, 선택사항)
+
+프로젝트마다 이런 일회성 스크립트를 실행하는게 굉장히 귀찮다면 yarn classic때 마냥 전역 설치를 하는 것도 가능하다.
+
+```bash
+corepack enable
+corepack prepare yarn@stable --activate
+```
+
+해당 명령어 순서대로 입력 후 yarn -v를 통해 버전을 확인해보면 정상적으로 적용된 것을 볼 수 있다.
+
+다만 마냥 권장하진 않는다. 아직 yarn berry와의 호환성 문제를 야기할 수 있는 부분들이 적지는 않을 거라 생각하는데 당장 나도 최근에 사용한 sanity에서는 아직 yarn berry가 유연하게 동작이 안 되는지 에러를 뿜어내서 그 프로젝트에는 다시 yarn classic으로 다운그레이드한 경험이 있었다. 본인이 레거시 프로젝트와 직면해야 하는 상황이라면 yarn berry 전역 설치는 재고해보길 바란다.
