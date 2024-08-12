@@ -15,7 +15,7 @@ const pretendard = localFont({
 export const metadata: Metadata = {
   title: meta.title,
   description: meta.description,
-  metadataBase: new URL(`${process.env.NEXT_PUBLIC_APP_BASE_URL}`),
+  metadataBase: new URL('https://elbyss.vercel.app'),
   alternates: {
     canonical: './',
   },
