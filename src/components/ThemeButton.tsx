@@ -17,7 +17,7 @@ export default function ThemeButton() {
   return (
     <button
       onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
-      className='p-1  text-gray-800 dark:text-gray-200 rounded-md text-xl hover:bg-gray-100 transition dark:hover:bg-[#343a40]'
+      className='p-1  text-gray-800 dark:text-gray-200 rounded-md text-xl hover:bg-gray-100 transition dark:hover:bg-[#343a40] sm:text-sm'
     >
       {theme === 'light' ? '🌙' : '🔆'}
     </button>
