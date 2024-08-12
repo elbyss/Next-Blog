@@ -20,10 +20,10 @@ export default function PostCard({
     <>
       <Link
         href={`/post/${slug}`}
-        className='no-underline flex py-4 hover:text-[#a580ff] transition duration-75 group sm:p-0 gap-12 sm:gap-6'
+        className='no-underline flex py-4 hover:text-[#a580ff] transition duration-75 group sm:p-0 gap-12 sm:gap-6 dark:text-gray-200 dark:hover:text-[#a580ff]'
       >
         <div className='w-[80%] flex flex-col gap-2'>
-          <div className={`font-extrabold text-xl mt-2 ml-2 sm:text-sm dark:text-gray-200`}>{title}</div>
+          <div className={`font-extrabold text-xl mt-2 ml-2 sm:text-sm `}>{title}</div>
           <div className={`text-slate-500 mt-2 ml-2 sm:text-xs dark:text-gray-300`}>{content}</div>
           <div className='flex gap-2 mb-2 ml-2 items-center'>
             <div className='font-medium text-sm text-gray-500 sm:text-xs'>{formatDate(date)}</div>
@@ -46,7 +46,7 @@ export default function PostCard({
             alt='thumbnail'
             width={130}
             height={90}
-            className='rounded-xl object-cover group-hover:scale-125 bg-gray-100 group-hover:transition group-hover:duration-300'
+            className='rounded-xl object-cover h-full group-hover:scale-125 bg-gray-100 group-hover:transition group-hover:duration-300'
             priority
           />
         </picture>
