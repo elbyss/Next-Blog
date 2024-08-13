@@ -5,6 +5,8 @@ import { Metadata } from 'next';
 import { meta } from '@/utils/meta';
 import { GoogleAnalytics, GoogleTagManager } from '@next/third-parties/google';
 import ThemeWrapper from '@/components/ThemeWrapper';
+import { Analytics } from '@vercel/analytics/react';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 
 const pretendard = localFont({
   src: './fonts/PretendardVariable.woff2',
@@ -46,6 +48,8 @@ export default function RootLayout({
   return (
     <html lang='en' suppressHydrationWarning>
       <GoogleTagManager gtmId={`${process.env.NEXT_PUBLIC_GTM_ID}`} />
+      <Analytics />
+      <SpeedInsights />
       <body className={`${pretendard.className} `}>
         <ThemeWrapper>
           <CategoryLayout>{children}</CategoryLayout>
