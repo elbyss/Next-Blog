@@ -36,7 +36,7 @@ export default function RecentPosts() {
           ))}
         </div>
         {/* 태그 */}
-        <aside className='flex-[0.4] sm:hidden'>
+        <aside className='flex-[0.4] sm:hidden lg:hidden'>
           <span>태그</span>
           <div className='flex gap-2 p-4 border'>
             <span

@@ -20,7 +20,7 @@ export default function PostCard({
     <>
       <Link
         href={`/post/${slug}`}
-        className='no-underline flex py-4 hover:text-[#a580ff] transition duration-75 group sm:p-0 gap-12 sm:gap-6 dark:text-gray-200 dark:hover:text-[#a580ff]'
+        className='no-underline flex py-4 hover:text-[#a580ff] transition duration-75 group gap-12 lg:px-4 dark:text-gray-200 dark:hover:text-[#a580ff]'
       >
         <div className='w-[80%] flex flex-col gap-2'>
           <div className={`font-extrabold text-xl mt-2 ml-2 sm:text-sm `}>{title}</div>
