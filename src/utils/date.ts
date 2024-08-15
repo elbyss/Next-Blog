@@ -9,5 +9,5 @@ dayjs.locale(ko);
 dayjs.tz.setDefault('Asia/Seoul');
 
 export function formatDate(date: Date | string): string {
-  return dayjs(date).tz().format('YYYY년 MM월 DD일 HH:mm');
+  return dayjs(date).tz().format('YYYY년 MM월 DD일');
 }
