@@ -42,9 +42,9 @@ export const metadata: Metadata = {
     },
   },
   icons: {
-    icon: '/profile-simple-transparent.png',
-    apple: '/profile-simple-transparent.png',
-    shortcut: '/profile-simple-transparent.png',
+    icon: '/icon.ico',
+    apple: '/icon.ico',
+    shortcut: '/icon.ico',
   },
 };
 
