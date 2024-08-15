@@ -1,0 +1,77 @@
+---
+title: 'Supabase 사용해보기'
+date: 2024-08-15 13:01
+content: Supabase에 대해 알아봅시다
+tags:
+  - 개발
+  - 프론트엔드
+thumbnail: '/posts/supabase-1/supabase.png'
+---
+
+![supabase-logo](/posts/supabase-1/supabase.png)
+
+## Supabase
+
+supabase는 firebase와 같은 BaaS 플랫폼이다.
+주요 특징은 다음과 같다.
+
+- PostgreSQL(RDBMS) 기반 DB
+  psql 기반으로 한 데이터베이스를 제공하기 때문에 복잡한 쿼리를 작성할 수 있다.
+- 다양한 플랫폼 지원
+  굉장히 스펙트럼 넓게 지원해준다. 사실상 웹 개발자들이 자주 사용할만한 프레임워크는 거진 다 지원한다고 봐도 무방하다.
+- 편리한 Realtime, OAuth, Storage 기능
+  supabase에서는 위와 같은 기능을 제공하기 때문에 실시간 채팅, 소셜 로그인, 이미지 저장을 편하게 연동할 수 있다.
+- 문서화가 잘 되어있음 (개인 의견)
+  개인적으로 느낀 장점인데 문서화가 깔끔하게 잘 되어있고 사용자 친화적이다. 기본적인 환경 세팅도 문서보고 복붙만 해주면 금방 할 수 있다.
+
+## 테이블 생성
+
+웹 대시보드에서 딸깍 몇번 하면 만들 수 있다. 테이블 추가하기를 누르면 아래와 같은 화면이 나오는데 각 컬럼별 타입도 자동완성으로 볼 수 있기에 sql 기본 지식이 있다면 어렵지 않게 구성할 수 있다. ✅ 체크박스에 보면 **Enable Row Level Security (RLS)** 가 보이는데 이는 psql의 RLS와 같은 기능이고 특정 권한에 대한 정책 업데이트가 필요할 때는 체크해두고 연습이나 프로젝트에서 엄격한 인증이 필요하지 않을 때는 귀찮으므로 굳이 체크할 필요는 없다.
+
+<picture className='border-2'>
+  <img src='/posts/supabase-1/supabase-table.png' alt='supabase-table' />
+  <figcaption className='text-center pb-4'>테이블 생성 화면</figcaption>
+</picture>
+
+## Next.js와 연동
+
+공식 문서 따라서 절차대로 진행하면 된다.
+
+```bash:.env
+NEXT_PUBLIC_SUPABASE_URL=''
+NEXT_PUBLIC_SUPABASE_ANON_KEY=''
+```
+
+```ts:/utils/supabase/client.ts
+import { createBrowserClient } from '@supabase/ssr';
+import { Database } from '../../../types_db';
+
+export const createClient = () =>
+  createBrowserClient<Database>(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!);
+```
+
+```ts:/utils/supabase/server.ts
+import { createServerClient, type CookieOptions } from '@supabase/ssr';
+import { cookies } from 'next/headers';
+
+export function createClient() {
+  const cookieStore = cookies();
+
+  return createServerClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!, {
+    cookies: {
+      getAll() {
+        return cookieStore.getAll();
+      },
+      setAll(cookiesToSet) {
+        try {
+          cookiesToSet.forEach(({ name, value, options }) => cookieStore.set(name, value, options));
+        } catch {
+          // The `setAll` method was called from a Server Component.
+          // This can be ignored if you have middleware refreshing
+          // user sessions.
+        }
+      },
+    },
+  });
+}
+```
