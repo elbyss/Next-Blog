@@ -28,7 +28,7 @@ supabase는 firebase와 같은 BaaS 플랫폼이다.
 
 웹 대시보드에서 딸깍 몇번 하면 만들 수 있다. 테이블 추가하기를 누르면 아래와 같은 화면이 나오는데 각 컬럼별 타입도 자동완성으로 볼 수 있기에 sql 기본 지식이 있다면 어렵지 않게 구성할 수 있다. ✅ 체크박스에 보면 **Enable Row Level Security (RLS)** 가 보이는데 이는 psql의 RLS와 같은 기능이고 특정 권한에 대한 정책 업데이트가 필요할 때는 체크해두고 연습이나 프로젝트에서 엄격한 인증이 필요하지 않을 때는 귀찮으므로 굳이 체크할 필요는 없다.
 
-<picture className='border-2'>
+<picture className='border-2 shadow-xl'>
   <img src='/posts/supabase-1/supabase-table.png' alt='supabase-table' />
   <figcaption className='text-center pb-4'>테이블 생성 화면</figcaption>
 </picture>
@@ -75,3 +75,33 @@ export function createClient() {
   });
 }
 ```
+
+## Supabase Storage를 이용한 이미지 업로드 구현
+
+```tsx
+// 업로드 처리
+export async function uploadFile(formData: FormData) {
+  const supabase = await createClient();
+  const file = formData.get('file') as File;
+
+  const { data, error } = await supabase.storage
+    .from(`${process.env.NEXT_PUBLIC_STORAGE_BUCKET}`)
+    .upload(file.name, file, { upsert: true });
+
+  if (error) handleError(error);
+
+  return data;
+}
+
+// 이미지 목록 불러오기
+export async function showImages() {
+  const supabase = await createClient();
+  const { data, error } = await supabase.storage.from('supaStorage').list();
+  if (error) handleError(error);
+  return data;
+}
+```
+
+<div align='center'>
+  <img src='/posts/supabase-1/supabase-storage.gif' className='border shadow-xl' />
+</div>
