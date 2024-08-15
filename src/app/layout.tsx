@@ -18,6 +18,11 @@ export const metadata: Metadata = {
   title: meta.title,
   description: meta.description,
   metadataBase: new URL('https://elbyss.vercel.app'),
+  applicationName: '엘비스의 기술 블로그',
+  authors: [{ name: 'elbyss' }, { name: 'elbyss', url: 'https://elbyss.vercel.app' }],
+  keywords: ['next.js', 'react', 'javaScript', 'supabase', 'nest.js', 'blog', 'react-query', 'tailwind'],
+  creator: 'elbyss',
+  publisher: 'elbyss',
   alternates: {
     canonical: './',
   },
@@ -27,6 +32,7 @@ export const metadata: Metadata = {
     description: '엘비스의 기술 블로그입니다.',
     url: 'https://elbyss.vercel.app',
     type: 'website',
+    locale: 'ko_KR',
     images: '/profile-simple-transparent.png',
   },
   verification: {
@@ -36,7 +42,9 @@ export const metadata: Metadata = {
     },
   },
   icons: {
-    icon: '/favicon.ico',
+    icon: '/profile-simple-transparent.png',
+    apple: '/profile-simple-transparent.png',
+    shortcut: '/profile-simple-transparent.png',
   },
 };
 
