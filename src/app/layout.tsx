@@ -33,7 +33,11 @@ export const metadata: Metadata = {
     url: 'https://elbyss.vercel.app',
     type: 'website',
     locale: 'ko_KR',
-    images: '/profile-simple-transparent.png',
+    images: [
+      {
+        url: '/favicon_black_square.png',
+      },
+    ],
   },
   verification: {
     google: `${process.env.NEXT_PUBLIC_GOOGLE_ID}`,
@@ -42,9 +46,9 @@ export const metadata: Metadata = {
     },
   },
   icons: {
-    icon: '/icon.ico',
-    apple: '/icon.ico',
-    shortcut: '/icon.ico',
+    icon: '/favicon_black_square.png',
+    apple: '/favicon_black_square.png',
+    shortcut: '/favicon_black_square.png',
   },
 };
 
