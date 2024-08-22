@@ -1,5 +1,5 @@
 module.exports = {
-  siteUrl: 'https://elbyss.vercel.app',
+  siteUrl: 'https://elbyss.xyz',
   generateRobotsTxt: true,
   changefreq: 'daily',
   priority: 0.8,

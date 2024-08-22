@@ -18,7 +18,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
     openGraph: {
       title: post.title,
       description: post.content,
-      url: `https://elbyss.vercel.app/post/${params.slug}`,
+      url: `https://elbyss.xyz/post/${params.slug}`,
       type: 'article',
       images: post.thumbnail,
     },

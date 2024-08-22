@@ -17,9 +17,9 @@ const pretendard = localFont({
 export const metadata: Metadata = {
   title: meta.title,
   description: meta.description,
-  metadataBase: new URL('https://elbyss.vercel.app'),
+  metadataBase: new URL('https://elbyss.xyz'),
   applicationName: '엘비스의 기술 블로그',
-  authors: [{ name: 'elbyss' }, { name: 'elbyss', url: 'https://elbyss.vercel.app' }],
+  authors: [{ name: 'elbyss' }, { name: 'elbyss', url: 'https://elbyss.xyz' }],
   keywords: ['next.js', 'react', 'javaScript', 'supabase', 'nest.js', 'blog', 'react-query', 'tailwind'],
   creator: 'elbyss',
   publisher: 'elbyss',
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
     title: '엘비스의 기술 블로그',
     siteName: '엘비스의 기술 블로그',
     description: '엘비스의 기술 블로그입니다.',
-    url: 'https://elbyss.vercel.app',
+    url: 'https://elbyss.xyz',
     type: 'website',
     locale: 'ko_KR',
     images: [
