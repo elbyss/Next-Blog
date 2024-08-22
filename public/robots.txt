@@ -3,7 +3,7 @@ User-agent: *
 Allow: /
 
 # Host
-Host: https://elbyss.vercel.app
+Host: https://elbyss.xyz
 
 # Sitemaps
-Sitemap: https://elbyss.vercel.app/sitemap.xml
+Sitemap: https://elbyss.xyz/sitemap.xml
