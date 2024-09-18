@@ -1,0 +1,69 @@
+---
+title: '[Three.js] Camera 정리'
+date: 2024-09-18
+content: Three.js에서 사용하는 Camera 메서드 정리
+tags:
+  - 프론트엔드
+  - 3D
+thumbnail: '/posts/threejs-1/threejs.png'
+---
+
+<br />
+
+## 목차
+
+1. [Camera](#camera)
+2. [ArrayCamera](#arraycamera)
+3. [StereoCamera](#stereocamera)
+4. [CubeCamera](#cubecamera)
+5. [PerspectiveCamera](#perspectivecamera)
+
+# Camera
+
+추상 클래스입니다. 상속을 통해 일반적인 프로퍼티와 메서드에 액세스할 수 있습니다. 이 클래스는 새 카메라를 빌드할 때 항상 상속되어야 합니다.
+
+# arraycamera
+
+여러 대의 카메라를 사용하여 Scene을 여러 번 렌더링하는 데 사용됩니다. 각 카메라는 캔버스의 특정 영역을 렌더링합니다.
+
+# StereoCamera
+
+눈을 모방한 두 대의 카메라를 통해 장면을 렌더링하여 뇌가 깊이가 있다고 생각하도록 유도하는 시차 효과를 만드는 데 사용됩니다. 3D Anaglyph 또는 Parallax Barrier와 같은 효과에 사용할 수 있습니다. 결과를 보려면 VR 헤드셋이나 빨간색 및 파란색 안경과 같은 적절한 장비가 있어야 합니다.
+
+# CubeCamera
+
+각 방향(상/하/좌/우/전/후)을 향한 렌더링을 가져와 주변을 렌더링하는 데 사용됩니다. 이를 사용하여 reflection을 위한 환경 맵이나 그림자 맵을 만들 수 있습니다.
+
+# OrthographicCamera
+
+OrthographicCamera는 원근감이 없는 카메라입니다. 원근감이 없기 때문에 카메라와의 거리 상관없이 객체의 크기가 동일합니다. 파라미터를 통해 방향을 설정해야합니다. (top, bottom, left, right) 에이지 오브 엠파이어와 같은 RTS 게임을 제작할 때 유용합니다. 요소는 카메라로부터의 거리에 관계없이 화면에서 동일한 크기를 갖습니다.
+
+# PerspectiveCamera
+
+PerspectiveCamera는 이미 실제 카메라를 원근감 있게 시뮬레이션하는 데 사용한 카메라입니다. 일반적으로 작업을 진행할 때 가장 사용 지분이 높습니다.
+
+# 카메라에 사용되는 주요 파라미터
+
+```js
+const camera = new THREE.PerspectiveCamera(45, width / height, 1, 1000); // FOV, aspect ratio, near, far
+scene.add(camera);
+```
+
+## Field of View(FOV)
+
+시야각을 의미합니다. 사람은 거의 180도의 시야각을 갖고 있지만 PC 화면에서는 180도 시야를 완전히 채우지 않기 때문에, 3D 그래픽에서는 일반적으로 더 작은 FOV 값을 사용합니다. 이 수치를 조정함에 따라 광각렌즈나 망원렌즈처럼 표현을 할 수 있습니다. 기본 값은 **50**입니다.
+
+## Aspect ratio
+
+화면비율, 종횡비를 의미합니다. 보통 너비를 높이에 나눈 값을 사용하고 기본 값은 **1**입니다.
+
+## near, far
+
+near과 far은 카메라와 얼마나 가까이(또는 멀리) 볼 수 있는지 조정하는 파라미터입니다. 매우 작은 값과 매우 큰 값을 사용하면 z-fighting 이라 불리는 버그가 발생할 수 있습니다.
+
+<div className='text-gray-500'>[Sources]</div>
+<p className='text-gray-500'> three.js lecture </p>
+<a href='https://threejs.org/docs/#api/en/cameras/Camera' target='blank' className='text-red-500 m-0'>
+  three.js documentation
+</a>
+```
