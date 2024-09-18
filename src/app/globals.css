@@ -7,6 +7,23 @@
   transition-duration: 150ms;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
+:target {
+  animation: highlight 1s ease-in-out;
+}
+
+@keyframes highlight {
+  0% {
+    background-color: lightpink;
+  }
+  100% {
+    background-color: transparent;
+  }
+}
+
 .rehype-code-title {
   background-color: black;
   color: white;
