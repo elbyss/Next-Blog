@@ -20,11 +20,26 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://elbyss.xyz'),
   applicationName: '엘비스의 기술 블로그',
   authors: [{ name: 'elbyss' }, { name: 'elbyss', url: 'https://elbyss.xyz' }],
-  keywords: ['next.js', 'react', 'javaScript', 'supabase', 'nest.js', 'blog', 'react-query', 'tailwind'],
+  keywords: [
+    'next.js',
+    'react',
+    'javaScript',
+    'supabase',
+    'nest.js',
+    'blog',
+    'react-query',
+    'tailwind',
+    'three.js',
+    'r3f',
+  ],
   creator: 'elbyss',
   publisher: 'elbyss',
   alternates: {
     canonical: './',
+  },
+  robots: {
+    index: true,
+    follow: true,
   },
   openGraph: {
     title: '엘비스의 기술 블로그',
