@@ -53,6 +53,9 @@
   counter-reset: line;
 }
 
+.prose a {
+  color: gray;
+}
 .prose code[data-line-numbers] > span[data-line]::before {
   counter-increment: line;
   content: counter(line);
