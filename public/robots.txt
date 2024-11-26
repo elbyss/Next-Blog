@@ -1,9 +1,3 @@
-# *
 User-agent: *
 Allow: /
-
-# Host
-Host: https://elbyss.xyz
-
-# Sitemaps
 Sitemap: https://elbyss.xyz/sitemap.xml
