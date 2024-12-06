@@ -46,7 +46,7 @@ export default function PostCard({
             alt='thumbnail'
             width={130}
             height={90}
-            className='rounded-xl object-cover h-full group-hover:scale-125 bg-gray-100 group-hover:transition group-hover:duration-300'
+            className='rounded-xl group-hover:scale-125 bg-gray-100 group-hover:transition group-hover:duration-300'
             priority
           />
         </picture>
