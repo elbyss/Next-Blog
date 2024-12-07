@@ -20,13 +20,14 @@ export default function PostCard({
     <>
       <Link
         href={`/post/${slug}`}
+        aria-label={`${title}`}
         className='no-underline flex py-4 hover:text-[#a580ff] transition duration-75 group gap-12 lg:px-4 dark:text-gray-200 dark:hover:text-[#a580ff]'
       >
         <div className='w-[80%] flex flex-col gap-2'>
-          <div className={`font-extrabold text-xl mt-2 ml-2 sm:text-sm `}>{title}</div>
-          <div className={`text-slate-500 mt-2 ml-2 sm:text-xs dark:text-gray-300`}>{content}</div>
+          <div className='font-extrabold text-xl mt-2 ml-2 sm:text-sm'>{title}</div>
+          <div className='text-slate-500 mt-2 ml-2 sm:text-xs dark:text-gray-300'>{content}</div>
           <div className='flex gap-2 mb-2 ml-2 items-center'>
-            <div className='font-medium text-sm text-gray-500 sm:text-xs'>{formatDate(date)}</div>
+            <time className='font-medium text-sm text-gray-500 sm:text-xs'>{formatDate(date)}</time>
             <div className='flex gap-2 sm:hidden dark:text-black'>
               {tags?.map((tag, idx) => (
                 <span
@@ -43,10 +44,10 @@ export default function PostCard({
         <picture className='relative flex items-center overflow-hidden w-[130px] h-[90px] rounded-xl border sm:border-none'>
           <Image
             src={thumbnail || ''}
-            alt='thumbnail'
+            alt={`${title}`}
             width={130}
             height={90}
-            className='rounded-xl group-hover:scale-125 bg-gray-100 group-hover:transition group-hover:duration-300'
+            className='rounded-xl group-hover:scale-125 bg-white group-hover:transition group-hover:duration-300'
             priority
           />
         </picture>

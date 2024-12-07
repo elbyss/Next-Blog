@@ -1,0 +1,175 @@
+---
+title: React 19 버전 업데이트 내용
+date: 2024-12-07
+content: React 19 버전 업데이트 내용
+tags:
+  - 개발
+  - 프론트엔드
+thumbnail: '/posts/react19/react19.png'
+---
+
+![react19-logo](/posts/react19/react19.png)
+
+그 동안 RC에 머물러있던 react v19가 드디어 12월 5일 정식 출시되었습니다.
+어떤 점이 바뀌었는지 breaking change 위주로 정리해보겠습니다.
+
+# React 19 새로운 기능
+
+## 1. Actions
+
+actions 라는 개념이 도입되었습니다. 이게 뭐냐면 그냥 pending, error 등 데이터 상태 업데이트를 더 쉽게 처리할 수 있도록 도와주는 기능입니다. 원래는 form 을 제출할 때 요청 진행 상태를 직접 작성하여 추가했어야 했는데 v19부터는 react에서 내장된 기능으로 쉽게 사용가능합니다.
+
+이에 따라 다음과 같은 hook이 새로 추가되었습니다.
+
+`useActionState, useOptimistic, useformStatus`
+
+위의 Hook을 쉽게 요약하면 react-hook-form 라이브러리의 기능 중 일부가 react에 내장되었다고 보시면 됩니다.
+
+## useActionState
+
+```jsx:useActionState showLineNumbers {3-5,13,15} /useActionState/
+function ChangeName({ name, setName }) {
+  const [error, submitAction, isPending] = useActionState(async (previousState, formData) => {
+    const error = await updateName(formData.get('name'));
+    if (error) {
+      return error;
+    }
+    redirect('/path');
+    return null;
+  }, null);
+
+  return (
+    <form action={submitAction}>
+      <input type='text' name='name' />
+      <button type='submit' disabled={isPending}>
+        Update
+      </button>
+      {error && <p>{error}</p>}
+    </form>
+  );
+}
+```
+
+`useActionState`는 비동기 함수를 인자로 받아 처리할 수 있는 Hook입니다. 로그인, 회원가입 등의 form을 제출했을 때 성공 또는 실패를 이 함수에서 바로 작성할 수 있겠네요.
+
+## useFormState
+
+```jsx:useFormState showLineNumbers {4}
+import { useFormStatus } from 'react-dom';
+
+function DesignButton() {
+  const { pending } = useFormStatus();
+  return <button type='submit' disabled={pending} />;
+}
+```
+
+```jsx
+const { pending, data, method, action } = useFormStatus();
+```
+
+`useFormStatus`는 form 의 제출 상태를 읽어오는 Hook입니다. 이를 통해 폼이 제출 중인지 끝난 건지 여부를 쉽게 파악할 수 있습니다. 반환 값은 보신 것처럼 4개가 있습니다. 언뜻 보면 useFormState와 useActionState가 비슷해보일 수 있으나, useFormState는 form의 제출 상태를 중점으로, useActionState는 비동기 처리에 중점을 두고 있습니다.
+
+## useOptimistic
+
+```jsx:useOptimistic showLineNumbers {2, 6}
+function ChangeName({ currentName, onUpdateName }) {
+  const [optimisticName, setOptimisticName] = useOptimistic(currentName);
+
+  const submitAction = async (formData) => {
+    const newName = formData.get('name');
+    setOptimisticName(newName);
+    const updatedName = await updateName(newName);
+    onUpdateName(updatedName);
+  };
+
+  return (
+    <form action={submitAction}>
+      <p>Your name is: {optimisticName}</p>
+      <p>
+        <label>Change Name:</label>
+        <input type='text' name='name' disabled={currentName !== optimisticName} />
+      </p>
+    </form>
+  );
+}
+```
+
+`useOptimistic` Hook은 데이터 변환 과정에서 **낙관적인 상태(**`Optimistic State`)를 즉시 렌더링할 수 있도록 도와주며, 요청이 종료되거나 오류가 발생하면 이전 상태로 돌아가는 기능을 합니다.
+
+## 2. use API 추가
+
+```jsx:use showLineNumbers {4}
+import { use } from 'react';
+
+function Comments({ commentsPromise }) {
+  const comments = use(commentsPromise);
+  return comments.map((comment) => <p key={comment.id}>{comment}</p>);
+}
+
+function Page({ commentsPromise }) {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <Comments commentsPromise={commentsPromise} />
+    </Suspense>
+  );
+}
+```
+
+use는 리소스를 읽는 API라고 소개되어있고 promise를 읽거나 context를 읽을 수 있는 기능을 한다고 합니다. Context API의 상위 호환 느낌으로 보입니다. 다른 점이라면 use는 조건문이나 반복문 내에서도 사용이 가능하고 비동기 데이터를 처리할 수 있다는 부분이겠네요.
+
+## 3. forward ref (deprecated)
+
+```jsx showLineNumbers
+function MyInput({ placeholder, ref }) {
+  return <input placeholder={placeholder} ref={ref} />;
+}
+
+//...
+<MyInput ref={ref} />;
+```
+
+```jsx showLineNumbers {7-9}
+<input
+  ref={(ref) => {
+    // ref created
+
+    // NEW: return a cleanup function to reset
+    // the ref when element is removed from DOM.
+    return () => {
+      // ref cleanup
+    };
+  }}
+/>
+```
+
+자식 컴포넌트에 ref를 전달하려면 forward ref를 통해 작업을 해주어야 했습니다.
+
+react 19 부터는 이제 props 형태로 사용할 수 있게 되었습니다. 이에 따라 forward ref도 삭제되었습니다.
+
+그리고 ref에도 cleanup이 가능하게 되었습니다.
+
+## 4. `<Context.Provider>` 대신 `<Context>`로
+
+```jsx showLineNumbers
+const ThemeContext = createContext('');
+
+function App({ children }) {
+  return <ThemeContext value='dark'>{children}</ThemeContext>;
+}
+```
+
+`<Context.Provider>`가 deprecated 되고 `<Context>`로 변경됩니다.
+
+## 4. hydration error 메세지 구체화
+
+hydration error 문구를 종종 만나볼 수 있는데, 정확히 어디에서 터지는 지 몰라, 약간 헤매는 시간이 필요했습니다. 이 점을 개선한 거 같습니다. 이제는 hydration error를 조금 더 상세하게 보여준다고 합니다.
+
+추가로, react와 협력하고있는 next 팀에서도 이번 next.js 15 버전에 hydration error 메세지를 더 디테일하게 보여주는 걸로 업데이트 되었습니다.
+
+이외에도 메타데이터, 스타일시트, async script, preloading resource 지원 등이 있습니다. 자세한 정보는 공식 문서에서 확인 가능합니다.
+
+## Reference
+
+<a href='https://react.dev/blog/2024/12/05/react-19' target='_blank'>
+  React 공식 문서
+</a>
