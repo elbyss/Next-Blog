@@ -58,7 +58,6 @@ export const metadata: Metadata = {
     google: process.env.NEXT_PUBLIC_GOOGLE_ID,
     other: {
       'naver-site-verification': process.env.NEXT_PUBLIC_NAVER_ID || '',
-      'google-site-verification': process.env.NEXT_PUBLIC_GOOGLE_ID || '',
     },
   },
   icons: {
