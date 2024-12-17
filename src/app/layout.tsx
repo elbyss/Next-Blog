@@ -55,9 +55,9 @@ export const metadata: Metadata = {
     ],
   },
   verification: {
-    google: `${process.env.NEXT_PUBLIC_GOOGLE_ID}`,
+    google: process.env.NEXT_PUBLIC_GOOGLE_ID,
     other: {
-      'naver-site-verification': `${process.env.NEXT_PUBLIC_NAVER_ID}`,
+      'naver-site-verification': process.env.NEXT_PUBLIC_NAVER_ID || '',
     },
   },
   icons: {
