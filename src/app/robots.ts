@@ -7,5 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: '/',
     },
     sitemap: 'https://elbyss.xyz/sitemap.xml/',
+    host: 'https://elbyss.xyz',
   };
 }
