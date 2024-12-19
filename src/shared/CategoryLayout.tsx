@@ -1,3 +1,4 @@
+'use client';
 import Navbar from '@/components/Navbar';
 import { meta } from '../utils/meta';
 import Image from 'next/image';
@@ -16,7 +17,7 @@ export default function CategoryLayout({ children }: { children: ReactNode }) {
                 alt='logo'
                 width={100}
                 height={48}
-                className='object-cover rounded-3xl h-12 w-24 sm:h-8 sm:w-16'
+                className='object-cover rounded-3xl h-[48px] w-[100px] sm:h-8 sm:w-16'
               />
               <span className='font-bold text-2xl sm:text-sm'>{meta.title}</span>
             </div>
