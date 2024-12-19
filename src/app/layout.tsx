@@ -74,15 +74,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en' suppressHydrationWarning>
-      <GoogleTagManager gtmId={`${process.env.NEXT_PUBLIC_GTM_ID}`} />
-      <Analytics />
-      <SpeedInsights />
-      <body className={`${pretendard.className} `}>
+      <body className={pretendard.className}>
         <ThemeWrapper>
           <CategoryLayout>{children}</CategoryLayout>
         </ThemeWrapper>
+        <GoogleTagManager gtmId={`${process.env.NEXT_PUBLIC_GTM_ID}`} />
+        <GoogleAnalytics gaId={`${process.env.NEXT_PUBLIC_GA_ID}`} />
+        <Analytics />
+        <SpeedInsights />
       </body>
-      <GoogleAnalytics gaId={`${process.env.NEXT_PUBLIC_GA_ID}`} />
     </html>
   );
 }
