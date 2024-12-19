@@ -26,16 +26,27 @@ export default function Giscus() {
     scriptElem.setAttribute('data-reactions-enabled', '1');
     scriptElem.setAttribute('data-emit-metadata', '0');
     scriptElem.setAttribute('data-input-position', 'bottom');
-    scriptElem.setAttribute('data-theme', 'preferred_color_scheme');
+    scriptElem.setAttribute('data-theme', theme);
     scriptElem.setAttribute('data-lang', 'ko');
 
-    ref.current.appendChild(scriptElem);
+    const currentRef = ref.current;
+    currentRef.appendChild(scriptElem);
+
+    return () => {
+      if (!currentRef?.isConnected) {
+        const iframe = document.querySelector<HTMLIFrameElement>('iframe.giscus-frame');
+        if (iframe) {
+          iframe.remove();
+        }
+      }
+    };
   }, [theme]);
 
-  // https://github.com/giscus/giscus/blob/main/ADVANCED-USAGE.md#isetconfigmessage
   useEffect(() => {
     const iframe = document.querySelector<HTMLIFrameElement>('iframe.giscus-frame');
-    iframe?.contentWindow?.postMessage({ giscus: { setConfig: { theme } } }, 'https://giscus.app');
+    if (iframe) {
+      iframe.contentWindow?.postMessage({ giscus: { setConfig: { theme } } }, 'https://giscus.app');
+    }
   }, [theme]);
 
   return <section ref={ref} />;
