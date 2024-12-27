@@ -1,5 +1,6 @@
+import { use } from 'react';
 import Giscus from '@/components/Giscus';
-import ProgressbarWrapper from '@/shared/ProgressbarWrapper';
+// import ProgressbarWrapper from '@/shared/ProgressbarWrapper';
 import { formatDate } from '@/utils/date';
 import sortPostsByDate from '@/utils/sortPostsByDate';
 import { allPosts } from 'contentlayer/generated';
@@ -9,7 +10,8 @@ import { notFound } from 'next/navigation';
 
 export const generateStaticParams = async () => allPosts.map((post) => ({ slug: post._raw.flattenedPath }));
 
-export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
+export async function generateMetadata(props: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const params = await props.params;
   const post = allPosts.find((p) => p._raw.flattenedPath === params.slug);
   if (!post) notFound();
   return {
@@ -25,7 +27,8 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   };
 }
 
-const PostDetailPage = ({ params }: { params: { slug: string } }) => {
+const PostDetailPage = (props: { params: Promise<{ slug: string }> }) => {
+  const params = use(props.params);
   const post = allPosts.find((p) => p._raw.flattenedPath === params.slug);
   if (!post) notFound();
   const posts = sortPostsByDate();
@@ -35,7 +38,7 @@ const PostDetailPage = ({ params }: { params: { slug: string } }) => {
 
   return (
     <>
-      <ProgressbarWrapper />
+      {/* <ProgressbarWrapper /> */}
       <article className='mx-auto max-w-4xl py-4 prose prose-slate dark:text-gray-300 dark:prose-headings:text-gray-300  prose-a:text-gray-300'>
         <div className='flex flex-col gap-4'>
           <div className='sm:text-xs'>{formatDate(post.date)}</div>

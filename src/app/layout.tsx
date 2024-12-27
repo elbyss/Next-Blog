@@ -12,6 +12,7 @@ const pretendard = localFont({
   src: './fonts/PretendardVariable.woff2',
   display: 'swap',
   weight: '45 920',
+  variable: '--font-pretendard',
 });
 
 export const metadata: Metadata = {
@@ -73,7 +74,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang='en' suppressHydrationWarning>
+    <html lang='en' suppressHydrationWarning className={pretendard.variable}>
       <body className={pretendard.className}>
         <ThemeWrapper>
           <CategoryLayout>{children}</CategoryLayout>

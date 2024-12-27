@@ -47,7 +47,9 @@ export default function PostCard({
             alt={`${title}`}
             width={130}
             height={90}
+            sizes='(max-width: 768px) 100vw, 130px'
             className='rounded-xl group-hover:scale-125 bg-white group-hover:transition group-hover:duration-300'
+            loading='eager'
             priority
           />
         </picture>

@@ -10,6 +10,7 @@ const config: Config = {
     './posts/**/*.{js,ts,jsx,tsx,md,mdx}',
   ],
   darkMode: 'class',
+
   theme: {
     screens: {
       lg: { max: '1023px' },
@@ -22,8 +23,7 @@ const config: Config = {
         foreground: 'var(--foreground)',
       },
       fontFamily: {
-        sans: ['var(--font-geist-sans)'],
-        mono: ['var(--font-geist-mono)'],
+        pretendard: ['var(--font-pretendard)'],
       },
     },
   },
