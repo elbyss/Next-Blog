@@ -1,7 +1,7 @@
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
 :root {
   transition-property: all;
   transition-duration: 150ms;
@@ -10,6 +10,7 @@
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 100px;
+  font-family: Pretendard Variable, system-ui, sans-serif;
 }
 
 :target {

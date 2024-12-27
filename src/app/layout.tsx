@@ -1,4 +1,3 @@
-import localFont from 'next/font/local';
 import './globals.css';
 import CategoryLayout from '@/shared/CategoryLayout';
 import { Metadata } from 'next';
@@ -7,13 +6,6 @@ import { GoogleAnalytics, GoogleTagManager } from '@next/third-parties/google';
 import ThemeWrapper from '@/components/ThemeWrapper';
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/next';
-
-const pretendard = localFont({
-  src: './fonts/PretendardVariable.woff2',
-  display: 'swap',
-  weight: '45 920',
-  variable: '--font-pretendard',
-});
 
 export const metadata: Metadata = {
   title: meta.title,
@@ -66,6 +58,10 @@ export const metadata: Metadata = {
     apple: '/favicon_black_square.png',
     shortcut: '/favicon_black_square.png',
   },
+  other: {
+    preload:
+      'https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css',
+  },
 };
 
 export default function RootLayout({
@@ -74,8 +70,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang='en' suppressHydrationWarning className={pretendard.variable}>
-      <body className={pretendard.className}>
+    <html lang='en' suppressHydrationWarning>
+      <body>
         <ThemeWrapper>
           <CategoryLayout>{children}</CategoryLayout>
         </ThemeWrapper>
