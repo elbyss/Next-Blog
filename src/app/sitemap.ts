@@ -5,7 +5,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const postSitemaps: MetadataRoute.Sitemap = allPosts.map((post) => ({
     url: `https://elbyss.xyz/post/${post._raw.flattenedPath}`,
     lastModified: new Date(post.date),
-    changeFrequency: 'always',
+    changeFrequency: 'daily',
   }));
 
   return [
